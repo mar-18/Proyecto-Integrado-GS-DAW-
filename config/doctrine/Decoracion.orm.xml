@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Decoracion" table="decoracion">
+    <id name="iddecoracion" type="integer" column="idDecoracion">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombredecoracion" type="string" column="nombreDecoracion" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipodecoracion" type="string" column="tipoDecoracion" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">boda,cumple,gradua,conferencia</option>
+      </options>
+    </field>
+    <field name="precio" type="float" column="precio" precision="10" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

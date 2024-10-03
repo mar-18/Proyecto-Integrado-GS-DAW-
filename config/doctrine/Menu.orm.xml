@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Menu" table="menu">
+    <id name="idmenu" type="integer" column="idMenu">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombremenu" type="string" column="nombreMenu" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="tipomenu" type="string" column="tipoMenu" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">desayuno,comida,cena,tapas</option>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="descripcion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ingredientes" type="string" column="ingredientes" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="precio" type="float" column="precio" precision="10" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

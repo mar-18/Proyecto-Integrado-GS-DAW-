@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Evento" table="evento">
+    <indexes>
+      <index name="fk_evento_menu1_idx" columns="menu_idMenu"/>
+      <index name="fk_evento_salon1_idx" columns="salon_idSalon"/>
+    </indexes>
+    <id name="idevento" type="integer" column="idEvento">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tipo" type="string" column="tipo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">boda,cumple,gradua,conferencia</option>
+      </options>
+    </field>
+    <field name="descripcion" type="string" column="descripcion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fecha" type="date" column="fecha" nullable="false"/>
+    <field name="hora" type="string" column="hora" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistentes" type="string" column="asistentes" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="salonIdsalon" target-entity="Salon" fetch="LAZY">
+      <join-columns>
+        <join-column name="salon_idSalon" referenced-column-name="idSalon"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="menuIdmenu" target-entity="Menu" fetch="LAZY">
+      <join-columns>
+        <join-column name="menu_idMenu" referenced-column-name="idMenu"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

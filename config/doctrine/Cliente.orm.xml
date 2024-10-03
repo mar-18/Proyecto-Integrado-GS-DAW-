@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Cliente" table="cliente">
+    <indexes>
+      <index name="fk_cliente_evento2_idx" columns="evento_idEvento1"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="email_UNIQUE" columns="email"/>
+      <unique-constraint name="idCliente_UNIQUE" columns="idCliente"/>
+    </unique-constraints>
+    <id name="idcliente" type="integer" column="idCliente">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="Nombre" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apellido" type="string" column="Apellido" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telefono" type="integer" column="Telefono" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="direccion" type="string" column="Direccion" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="eventoIdevento1" target-entity="Evento" fetch="LAZY">
+      <join-columns>
+        <join-column name="evento_idEvento1" referenced-column-name="idEvento"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

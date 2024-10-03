@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}-Empleado{% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{parent()}}
+    <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <div class="inner-heading">
+                <h2>Empleados</h2>
+              </div>
+            </div>
+            <div class="span8">
+              <ul class="breadcrumb">
+                <li><a href="{{ path("index") }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                <li class="active">Empleados</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<section id="content">
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idempleado</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Usuario</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for empleado in paginacion %}
+            <tr>
+                <td>{{ empleado.idempleado }}</td>
+                <td>{{ empleado.nombre }}</td>
+                <td>{{ empleado.apellido }}</td>
+                <td>{{ empleado.edad }}</td>
+                <td>{{ empleado.telefono }}</td>
+                <td>{{ empleado.direccion }}</td>
+                <td>{{ empleado.user }}</td>
+                <td>
+                    <a class="btn btn-inverse" href="{{ path('empleado_show', {'idempleado': empleado.idempleado}) }}">Mostrar</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-warning" href="{{ path('empleado_edit', {'idempleado': empleado.idempleado}) }}">Editar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Sin datos</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a class="btn btn-large btn-theme btn-rounded" href="{{ path('empleado_new') }}">Nuevo</a>
+    {% endif %}
+    <div  class="navigation"> 
+        {{knp_pagination_render ( paginacion )}} 
+        Total de empleados: {{ paginacion.getTotalItemCount }}       
+    </div>
+
+    </div>
+</section>   
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}     
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="span12">
+{{ form_start(form) }}
+    {#{ form_widget(form) }#}
+    {{ form_row(form.nombresalon,{'label':'Nombre salón','attr':{'placeholder':'nombre'}}) }}
+    {{ form_row(form.capacidad,{'label':'Capacidad del salón','attr':{'placeholder':'capacidad'}}) }}
+    {% set type = type | default('text') %}
+    {{ form_row(form.foto,{'attr':{'type': type }}) }}
+
+    <img id="imgMini" class="img-fluid" width="250px" alt="No ha seleccionado ninguna foto" src="">
+
+    {{ form_row(form.precio,{'label':'Precio salón','attr':{'placeholder':'€'}}) }}
+    {{ form_row(form.decoracionIddecoracion,{'label':'Código decoración'}) }}
+    <div class="span12 margintop10 form-group">                
+        <div class="validation"></div>
+        <p class="text-center">
+            <button class="btn btn-large btn-theme margintop10" >{{ button_label|default('Aceptar') }}</button>
+        </p>
+    </div>
+        
+{{ form_end(form) }}
+</div>
+</div>
+{% block javascripts %}
+    <script src="{{ asset("js/js.js") }}"></script>    
+{% endblock %}

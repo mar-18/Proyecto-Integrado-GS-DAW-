@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Usuario(n){% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+<section id="inner-headline">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <div class="inner-heading">
+          <h2>Usuario nuevo</h2>
+        </div>
+      </div>
+      <div class="span8">
+        <ul class="breadcrumb">            
+          <li><a href="{{ path('index') }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+          <li><a href="{{ path('user_index') }}">Listado usuario</a><i class="icon-angle-right"></i></li>          
+          <li class="active">Nuevo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="content">
+    <div class="container">
+    {{ include('user/_form.html.twig') }}
+    <div class="row">
+        <div class="span12">        
+            <div class="span12 margintop10 form-group">
+              <div class="validation"></div>
+              <p class="text-center">                  
+                </p>
+            </div>
+            
+          </div> 
+          <a class='btn btn-blue'  href="{{ path('user_index') }}">Regresar</a>
+        </div>        
+    </div>
+</section>   
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}     
+    <script type="text/javascript" src="{{ asset("js/js.js") }}"></script>
+{% endblock %}

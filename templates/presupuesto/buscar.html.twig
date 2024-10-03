@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}-Presupuesto{% endblock %}
+{% block stylesheets %}
+  {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<section id="inner-headline">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <div class="inner-heading">
+          <h2>Presupuesto</h2>
+        </div>
+      </div>
+      <div class="span8">
+        <ul class="breadcrumb">
+          <li><a href="{{ path("index") }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+          <li class="active">Presupuesto</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="content">  
+  <div class="span4">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="{{ asset("img/logo1.png")}}" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{ asset("img/logo1.png")}}" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{ asset("img/logo1.png")}}"alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">-</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">></span>
+      </a>
+    </div>
+  </div>
+  <div class="container">
+    <h1><i class="fas fa-address-book"></i>Presupuesto</h1>
+    <h2 class="heading">Elige <strong>fecha y salon</strong> para tu evento</h2>
+    
+  {{ controller_name }}
+    <h4 class="heading">Buscar: </h4>
+    <p class="heading">
+      {% if controller_name == "Salon no disponible para esta fecha"  %}
+      {{ controller_name }}, selecciona otra fecha, o no ha seleccionado una fecha <i class="fas fa-edit"></i>
+      {% endif %}
+    </p>
+      
+    <div>
+
+      <label class="heading" for="fechaEvento">Fecha para el evento</label>
+      
+        <input type="date" name="fecha" id="fechaT" class="form-control" required autofocus>
+      <label class="heading" for="salon">Salones</label>
+        <select id="salonT" class="form-control">
+          {% for salon in salonRepositorio %}
+            <option class="heading">{{ salon.nombresalon}}</option>
+          {% endfor %}
+        </select>  
+        <div class="span12">
+          <div class="big-cta">
+            <div class="cta-text">
+              
+            </div>
+            <div class="cta floatright">
+              <a class="btn btn-large btn-theme btn-rounded"><button type="submit" id="buscar" class="btn btn-large btn-theme btn-rounded"> Buscar</button></a>
+            </div>
+          </div>
+        </div>
+      
+    </div> 
+    <!-- divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="solidline">
+        </div>
+      </div>
+    </div>
+    <!-- end divider -->
+    <!-- Portfolio Projects -->
+    <div class="row">
+      <div class="span12">
+        <h4 class="heading">Nuestros <strong>salones</strong></h4>
+        <div class="row">
+          <section id="projects">
+            <ul id="thumbs" class="portfolio">
+              <!-- Item Project and Filter Name -->
+                {% for salon in salonRepositorio %}
+                        <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
+                          <!-- Fancybox - Gallery Enabled - Title - Full Image -->
+                          <a class="hover-wrap fancybox" data-fancybox-group="gallery" title={{ salon.nombresalon}} href={% if salon.foto|length >0 %}"{{ asset ('img/'~salon.foto) }}"{% else %} "{{ asset ('img/dummies/blog/65x65/thumb1.jpg') }}"{% endif %} alt="Aforo: {{ salon.capacidad }} personas">
+                  <span class="overlay-img"></span>
+                  <span class="overlay-img-thumb font-icon-plus"></span>
+                  </a>
+                          <!-- Thumb Image and Description -->
+                          <img src={% if salon.foto|length >0 %}"{{ asset ('img/'~salon.foto) }}"{% else %} "{{ asset ('img/dummies/blog/65x65/thumb1.jpg') }}"{% endif %} alt="Aforo: {{ salon.capacidad }} personas" >
+                        </li>
+                {% endfor %}
+              <!-- End Item Project -->
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- End Portfolio Projects -->
+    <!-- divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="solidline">
+        </div>
+      </div>
+    </div>
+    <!-- end divider -->
+    
+  </div>
+</section>
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script src="{{ asset("js/ajax.js") }}"></script>
+<script>
+      $(window).ready(function(){
+        $("#buscar").click(function(ev){
+          ev.preventDefault();
+          buscar();
+        })
+      })
+    function buscar(){
+      let datos={
+        "fechaT":$("#fechaT").val(),
+        /*"numPersonasT":$("#numPersonasT").val(),*/
+        "salonT":$("#salonT").val()
+       
+      };
+      window.location.href ="{{path('buscarR')}}"+"/"+JSON.stringify(datos);
+    }
+    </script>
+{% endblock %}

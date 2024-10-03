@@ -1,0 +1,246 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}-Presupuesto{% endblock %}
+
+{% block content %}
+{{parent()}}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div class="inner-heading">
+            <h2>Presupuesto</h2>
+          </div>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb">
+            <li><a href="{{ path("index") }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+            <li class="active">Presupuesto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="content">  
+    <div class="span4">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{{ asset("img/logo1.png")}}" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{ asset("img/logo1.png")}}" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{ asset("img/logo1.png")}}"alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">-</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">></span>
+        </a>
+      </div>
+    </div>
+        <div class="container">
+
+
+  
+<div class="example-wrapper">
+    
+    <h1><i class="fas fa-address-book"></i>{{ controller_name }}</h1>
+
+    <!--Si no encuentra datos previos solicita ingresar datos para el presupuesto-->
+    {% if controller_name == "Datos para el presupuesto"  %}
+    
+    <!--Datos para el presupuesto-->
+    <div class="row">
+        
+        <div class="span12">
+            <!--Verificar que no hayan campos nulos-->
+            {% if camposVacios == "Campos obligatorios vacios"  %}
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Ops!</strong> Campos obligatorios vacios.
+              </div>
+              {% endif %}
+            <!-- Description -->
+            
+            <dl>
+              <dt>Nombre de referencia:</dt>
+                <dd><input type="text" name="nombre" id="nombreReferenciaT" class="form-control" required><span class="asterisk_input"></span></dd>
+              <dt>Telefono</dt>
+                <dd><input type="tel" name="telContacto" id="telReferenciaT" class="form-control" required><span class="asterisk_input"></span></dd>
+              <dt>Fecha del evento</dt>
+                <dd><input type="text" name="fecha" id="fechaT" value={{ vFecha }} class="form-control" disabled></dd>
+              <dt>Salon elegido</dt>
+                <dd><input type="text" name="salon" value={{ vSalon }} id="salonT" class="form-control" disabled> </dd>
+              <dt>Numero de personas</dt>
+                <dd><input type="number" min="15" max="200" name="numPersonasT" id="numPersonasT" class="form-control" required>
+                <br><span class="asterisk_input"></span>min:15-max:200
+                </dd>
+                
+              <dt>Menus</dt>
+                <dd>
+                    <select id="menuT" class="form-control">
+                    {% for menu in menus %}
+                        <option>{{ menu.nombremenu}}</option>
+                    {% endfor %}
+                    </select>
+                </dd>
+            </dl>
+          </div>
+          <h7 class="ml-5">
+            <span class="asterisk_input"></span>Campos obligatorios
+          </h7>
+      </div>
+      
+  
+    <input class="btn btn-green " type="submit" id="aceptar" value="Aceptar">
+    {% elseif controller_name == "Presupuesto" %}
+
+    <!--Datos finales de presupuesto que se enviaran por correo -->
+    <div class="span12">       
+        <dl class="dl-horizontal pullquote-left">
+          <form action="{{ path('sendemail')}}" method="POST">
+                <h2>Datos</h2>    
+                <dt>Nombre</dt>
+                <dd>{{nombreReferencia}}</dd>
+                <dt>Telefon</dt>
+                <dd>{{telReferencia}}</dd>
+                
+                <dt>Fecha</dt>
+                <dd>{{vFecha}}</dd>
+                <dt>Salon</dt>
+                <dd>{{vSalon}}</dd>
+                <dt>Menu</dt>
+                <dd>{{menuElegido}}<br>Precio: <strong>{{precioMenu}}€</strong></dd>
+                <dt>Numero personas</dt>
+                <dd>{{ nPersonas }}</dd>
+                <dt>Total</dt>
+                <dd>{{total}}</dd>
+                <br>
+                        <input type="hidden" name="nombreReferencia" value={{nombreReferencia}}>    
+                        <input type="hidden" name="telReferencia" value={{telReferencia}}>  
+                        <input type="hidden" name="fecha" value={{vFecha}}>
+                        <input type="hidden" name="nombreSalon" value={{vSalon}}>      
+                        <input type="hidden" name="menuElegido" value={{menuElegido}}>
+                        <input type="hidden" name="precioMenu" value={{precioMenu}}>
+                        <input type="hidden" name="nPersonas" value={{nPersonas}}>
+                        <input type="hidden" name="total" value={{total}}>
+
+             <!--envio de presupuesto y impresion-->
+            
+                <h5>Enviar presupuesto por <strong>correo </strong> electronico</h5>
+                <div class="form-group">
+                <h7><strong>Correo electronico</strong> </h7>
+                <input type="email" class="form-control" name="correo" aria-describedby="emailHelp" placeholder="correo">
+                </div>
+                   
+                <input type="submit" value="Enviar" class="btn btn-success font-weight-bold">
+                
+          </form>
+        </dl>
+      </div>
+    
+    <!--imprimir-->
+      <form action="{{ path('imprimir') }}" method="POST">
+                    <input type="hidden" name="nombreReferencia" value={{nombreReferencia}}>    
+                    <input type="hidden" name="telReferencia" value={{telReferencia}}>  
+                    <input type="hidden" name="fecha" value={{vFecha}}>
+                    <input type="hidden" name="nombreSalon" value={{vSalon}}>      
+                    <input type="hidden" name="menuElegido" value={{menuElegido}}>
+                    <input type="hidden" name="precioMenu" value={{precioMenu}}>
+                    <input type="hidden" name="nPersonas" value={{nPersonas}}>
+                    <input type="hidden" name="total" value={{total}}>
+            <!--envio de impresion-->
+            <div class="form-group">
+                <input type="submit" value="Imprimir" class="btn btn-success font-weight-bold">
+                <!--imprimir-->
+            </div>            
+      </form>
+
+    {% endif %}
+</div>
+</section>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script src="{{ asset("js/ajax.js") }}"></script>
+<script>
+      $(window).ready(function(){
+        $("#aceptar").click(function(ev){
+          ev.preventDefault();
+          buscar();
+        })
+      })
+    function buscar(){
+        
+      let datos={
+        "nombreReferenciaT":$("#nombreReferenciaT").val(),
+        "telReferenciaT":$("#telReferenciaT").val(),
+        "fechaT":$("#fechaT").val(),
+        "numPersonasT":$("#numPersonasT").val(),
+        "salonT":$("#salonT").val(),
+        "menuT":$("#menuT").val(),
+               
+      };
+      window.location.href ="{{path('datosPresupuesto')}}"+"/"+JSON.stringify(datos);
+    }
+    </script>
+<script>
+   /*  $(window).ready(function(){
+        $("#buscarFecha").click(function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        buscarFecha();
+
+        })
+    })
+
+    function buscarFecha(){
+        var fechaTwig=$("#fecha").val();
+        var url="{{ path('buscarPorFecha') }}";
+
+        $.ajax({ 
+            tipe:'POST',
+            url:url,
+            data:({fecha:fechaTwig}),
+            //dataType:'json'
+        }).done(function(datos){
+            
+            //convertir el objeto JSON a texto
+            var json_string = JSON.stringify(datos);
+ 
+            //convertir el texto a un nuevo objeto
+            var obj = $.parseJSON(json_string);
+            alert(obj)
+            /*asignar los valores obtenidos del objeto
+            * a cada unos de losc controlres deseados
+            * en el formulario
+            $('#nombresalon').html(obj.nombresalon);
+            $('#capacidad').html(obj.capacidad);
+            $('#tipo').html(obj.tipo);
+            $('#fecha').html(obj.fecha);
+            $('#hora').html(obj.hora);
+                        console.log(obj);
+                            //$("#lista").html(datos);
+                        });
+                } */
+</script>
+{% endblock %}

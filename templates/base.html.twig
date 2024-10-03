@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>{% block title %}SALO{% endblock %}</title>
+        
+        {% block stylesheets %}
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="{{ asset("css/estilos.css") }}">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                <script src="{{ asset('js/js.js')}}"></script>
+                <!--icono parte superior del buscador-->
+                <link rel="icon" href="../public/imagenes/logo.png" type="image/png">
+                <link rel="icon" href="{{asset('../public/imagenes/logo.png')}}" type="image/png">
+                <!--enlace a la pagina para iconos FONT AWESOME-->
+                <script src="https://kit.fontawesome.com/5ca69696cc.js" crossorigin="anonymous"></script>
+                <!--enlace a la pagina de fuentes GOOGLE FONTS -->
+                <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+                <!---->
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="description" content="" />
+                <meta name="author" content="" />
+        
+                <!-- css -->
+                <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
+                <link href="{{ asset("css/bootstrap.css")}}" rel="stylesheet" />
+                <link href="{{ asset("css/bootstrap-responsive.css")}}" rel="stylesheet" />
+                <link href="{{ asset("css/fancybox/jquery.fancybox.css")}}" rel="stylesheet">
+                <link href="{{ asset("css/jcarousel.css")}}" rel="stylesheet" />
+                <link href="{{ asset("css/flexslider.css")}}" rel="stylesheet" />
+                <link href="{{ asset("css/style.css")}}" rel="stylesheet" />
+                <!-- Theme skin -->
+                <link href="{{ asset("skins/default.css")}}" rel="stylesheet" />
+                <!-- Fav and touch icons -->
+                <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset("ico/apple-touch-icon-144-precomposed.png")}}" />
+                <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset("ico/apple-touch-icon-114-precomposed.png")}}" />
+                <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset("ico/apple-touch-icon-72-precomposed.png")}}" />
+                <link rel="apple-touch-icon-precomposed" href="{{ asset("ico/apple-touch-icon-57-precomposed.png")}}" />
+                <link rel="shortcut icon" href="{{ asset("ico/favicon.png")}}" />
+        
+        <!-- =======================================================
+          Theme Name: Flattern
+          Theme URL: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/
+          Author: BootstrapMade.com
+          Author URL: https://bootstrapmade.com
+        ======================================================= -->
+        {% endblock %}
+    </head>
+    <body>
+         
+        {% block body %}
+            <!-- CABECERA -->
+            {% embed "shared/cabecera.html.twig" %}    
+            {% endembed %}
+            <!-- MENU -->
+            {% embed "shared/menu.html.twig" %}
+            {% endembed %}
+            {% block content %}
+                <!--Contenido que varia-->
+            {% endblock %}
+
+            <!-- FOOTER -->
+            {% embed "shared/pie.html.twig" %}
+            {% endembed %}
+        {% endblock %}
+        
+        {% block javascripts %}
+        <!-- javascript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+            <script src="{{ asset("js/jquery.js")}}"></script>
+            <script src="{{ asset("js/jquery.easing.1.3.js")}}"></script>
+            <script src="{{ asset("js/bootstrap.js")}}"></script>
+            <script src="{{ asset("js/jcarousel/jquery.jcarousel.min.js")}}"></script>
+            <script src="{{ asset("js/jquery.fancybox.pack.js")}}"></script>
+            <script src="{{ asset("js/jquery.fancybox-media.js")}}"></script>
+            <script src="{{ asset("js/google-code-prettify/prettify.js")}}"></script>
+            <script src="{{ asset("js/portfolio/jquery.quicksand.js")}}"></script>
+            <script src="{{ asset("js/portfolio/setting.js")}}"></script>
+            <script src="{{ asset("js/jquery.flexslider.js")}}"></script>
+            <script src="{{ asset("js/jquery.nivo.slider.js")}}"></script>
+            <script src="{{ asset("js/modernizr.custom.js")}}"></script>
+            <script src="{{ asset("js/jquery.ba-cond.min.js")}}"></script>
+            <script src="{{ asset("js/jquery.slitslider.js")}}"></script>
+            <script src="{{ asset("js/animate.js")}}"></script>
+            <script src="{{ asset("js/ajax.js") }}"></script>
+            <!--Propio-->
+            <script src="{{ asset("js/js.js") }}"></script>
+
+            <!-- Template Custom JavaScript File -->
+            <script src="{{ asset("js/custom.js")}}"></script>       
+            <!-- script que visualiza el nombre de la foto que he seleccionado
+        lo visualiza en el input -->
+         <script type="application/javascript">
+        	$('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+            });
+    	</script> 
+        {% endblock %}
+    </body>
+</html>

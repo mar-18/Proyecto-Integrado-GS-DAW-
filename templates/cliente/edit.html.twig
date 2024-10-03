@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Cliente(e){% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+<section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div class="inner-heading">
+            <h2>Editar cliente</h2>
+          </div>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb">            
+            <li><a href="{{ path('index') }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+            <li><a href="{{ path('cliente_index') }}">Listado clientes</a><i class="icon-angle-right"></i></li>
+            <li><a href="{{ path('cliente_show', {'idcliente': cliente.idcliente}) }}">Detalle cliente</a><i class="icon-angle-right"></i></li>
+            <li class="active">Editar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="content">    
+    <div class="container">
+        <div class="row">
+          <div class="span12">
+            <h4><strong>Actualizar datos</strong></h4>
+          </div>
+        </div>  
+        
+        {{ include('cliente/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+      <div class="row">
+        <div class="span12">        
+          <div class="span12 margintop10 form-group">
+            <div class="validation"></div>
+            <p class="text-center">
+                {{ include('cliente/_delete_form.html.twig') }} 
+              </p>
+              <a class='btn btn-blue' href="{{ path('cliente_index') }}">Regresar</a>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}     
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Usuario(e){% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+<section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div class="inner-heading">
+            <h2>Editar usuario</h2>
+          </div>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb">            
+            <li><a href="{{ path('index') }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+            <li><a href="{{ path('user_index') }}">Listado usuario</a><i class="icon-angle-right"></i></li>
+            <li><a href="{{ path('user_show', {'id': user.id}) }}">Detalle usuario</a><i class="icon-angle-right"></i></li>
+            <li class="active">Editar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</section>
+<section id="content">    
+  <div class="container">
+        <div class="row">
+          <div class="span12">
+            <h4><strong>Actualizar datos</strong></h4>
+          </div>
+        </div>  
+        {{ include('user/_form.html.twig', {'button_label': 'Actualizar'}) }}
+        
+            <div class="span12">        
+              <div class="span12 margintop10 form-group">
+                <div class="validation"></div>
+                <p class="text-center">
+                  {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('user/_delete_form.html.twig') }}
+                    {% endif %}
+                  </p>
+                  <a class='btn btn-blue' href="{{ path('user_index') }}">Regresar</a>
+              </div>          
+            </div>        
+          
+      </div>
+    </section>
+    {% endblock %}
+    {% block javascripts %}
+        {{parent()}}     
+    {% endblock %}    
+

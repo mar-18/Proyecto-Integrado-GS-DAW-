@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Cliente{% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{parent()}}
+    <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <div class="inner-heading">
+                <h2>Clientes</h2>
+              </div>
+            </div>
+            <div class="span8">
+              <ul class="breadcrumb">
+                <li><a href="{{ path("index") }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                <li class="active">Clientes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<section id="content">
+    <div class="container">
+    <form class="form-inline ">
+        <div class="search">
+            <input type="search" name="query" value="" id="search_keywords" placeholder="Buscar">
+            <button class="btn btn-outline-primary my-2 my-sm-0" id="buscar" title="Buscar" type="submit"><i class="fas fa-search"></i></button>
+              <img id="loader" src="{{ asset("img/cargando.gif")}}" style="vertical-align: middle; display: none" />
+              <div class="help">
+                Busqueda por nombre
+              </div>    
+        </div>
+    </form>
+    <div id="nombre">
+            <!--mostrar resultado ajax-->
+            
+    </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Idcliente</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <th>Opciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for cliente in paginacion %}
+                <tr>
+                    <td>{{ cliente.idcliente }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.direccion }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-inverse" href="{{ path('cliente_show', {'idcliente': cliente.idcliente}) }}">Mostrar</a>
+                            <a class="btn btn-warning" href="{{ path('cliente_edit', {'idcliente': cliente.idcliente}) }}">Editar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Sin datos</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-large btn-theme btn-rounded" href="{{ path('cliente_new') }}">Nuevo</a>
+        {% endif %}
+        <div class="row">
+            <div class="span6">
+            </div>
+            <div class="span6">
+
+            </div>
+        </div>
+        <div  class="navigation"> 
+            {{knp_pagination_render ( paginacion )}} 
+            Total de clientes: {{ paginacion.getTotalItemCount }}       
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        $("#buscar").click(function(ev){
+        ev.preventDefault();
+        buscarNombre();
+    })
+    function buscarNombre(){
+      $('#buscar').hide(); 
+      $('#loader').show();
+      //$('#search_keywords').keyup(function(key)
+      //{
+        var buscarN=$("#search_keywords").val();
+        //if (this.value.length >= 3 || this.value == '')
+        //{
+          
+          var ruta="{{ path('buscarPorNombre') }}";
+          //var ruta= Routing.generate('buscarPorNombre');
+          $.ajax({      
+            type:'POST',
+            url:ruta,
+            data:({nombre:buscarN}),
+            async:true,
+            dataType:'json',
+            success: function(data){
+                console.log(data);
+                $('#loader').hide();
+                $('#buscar').show(); 
+                $('#nombre').html(data)
+            }
+          }) 
+          /*
+          $('#nombre').load(
+            $(this).parents('form').attr('action'),
+            { query: this.value + '*' },
+            function() { $('#loader').hide(); }
+          );*/
+       // }
+      //});
+    }
+    
+    </script>     
+{% endblock %}

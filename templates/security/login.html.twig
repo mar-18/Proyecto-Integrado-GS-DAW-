@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}-Registrate!{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+
+<section id="inner-headline">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <div class="inner-heading">
+          <h2>Identificate</h2>
+        </div>
+      </div>
+      <div class="span8">
+        <ul class="breadcrumb">
+          <li><a href="{{ path("index") }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+          <li class="active">Iniciar sesión</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="content">
+  <div class="container">
+
+    <form method="post" class="form-horizontal">
+      {% if error %}
+          <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+  
+      {% if app.user %}
+          <div class="mb-3">
+              Estas logueado: {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+          </div>
+      {% endif %}
+  
+      <h4 id="mySigninModalLabel">Iniciar <strong>sesión</strong></h4>
+      <div class="control-group">
+          <label class="control-label" for="inputEmail">Email</label>
+          <div class="controls">
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="email" required autofocus>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputSigninPassword">Contraseña</label>
+          
+          <div class="controls">
+            <input type="password" placeholder="Contraseña"  name="password" id="inputSigninPassword" class="form-control" required>
+          </div>
+        </div>
+      
+  
+      <input type="hidden" name="_csrf_token"
+             value="{{ csrf_token('authenticate') }}"
+      >
+  
+      {#
+          Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+          See https://symfony.com/doc/current/security/remember_me.html
+  
+          <div class="checkbox mb-3">
+              <label>
+                  <input type="checkbox" name="_remember_me"> Remember me
+              </label>
+          </div>
+      #}
+      <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-large btn-theme margintop10" type="submit" >Entrar</button>
+          </div>
+          <p class="aligncenter margintop20">
+            ¿Olvidaste tu contraseña? <a href="#myReset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Cambiar</a>
+          </p>
+        </div>
+  </form>  
+                      {% if is_granted('ROLE_ADMIN') %}
+                      {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+
+{% endblock %}

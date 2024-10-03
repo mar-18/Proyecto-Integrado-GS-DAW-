@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{parent()}}-Prespuesto{% endblock %}
+{% block stylesheets %}
+  {{parent()}}
+{% endblock %}
+{% block body %}
+{# plantilla #}
+<section id="inner-headline">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <div class="inner-heading">
+            <h2>Presupuesto</h2>
+          </div>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb">
+                
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr>
+<br><br><br>
+
+
+
+	<div class="container">
+        <div class="row">
+            <div class="span12">
+                <aside class="right-sidebar">
+                  <div class="widget">
+                    <h5 class="widgetheading">Datos</h5>
+                    <ul class="folio-detail">
+                      <li><label>Nombre :</label> {{nombreReferencia}}</li>
+                      <li><label>Telefon :</label> {{telReferencia}}</li>
+                      <li><label>Fecha :</label> {{fecha}}</li>
+                      <li><label>Salon :</label> {{menuElegido}}</li>
+                      <li><label>Menu :</label> {{nombreSalon}} <br>Precio: {{precioMenu}}</li>
+                      <li><label>Numero personas :</label> {{ nPersonas }}</li>
+                    </ul>
+                  </div>
+                  <hr>
+                  <div class="widget">
+                    <h5 class="widgetheading">Precio total</h5>
+                    <p>
+                      El presupuesto final seria el siguiente: {{total}}€. Esperamos saber pronto tu respuesta.
+
+                      Un saludo!
+                    
+                    </p>
+                  </div>
+                </aside>
+              </div>
+        </div>
+        <br><br><br><br><br><br><br>
+	  <div class="row">
+		<div class="span3">
+		  <div class="widget">
+			<h5 class="widgetheading">Ponte en contacto con nosotros</h5>
+			<address>
+							  <strong>Dirección:</strong><br>
+							   Andalucia, Avenida 5-65<br>
+							   España
+						   </address>
+			<p>
+			  Telefono: (+34) 456-7890-55 <br>
+			  Email: salo@gmail.com
+			</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div id="sub-footer">
+	  <div class="container">
+		<div class="row">
+		  <div class="span6">
+              <br><br><br>
+			<div class="copyright">
+			  <p>
+				<span>© SALO - Todos los derechos reservados.</span>
+			  </p>
+			</div>
+		  </div>
+
+		</div>
+	  </div>
+	</div>
+{% endblock %}
+

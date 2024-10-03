@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Decoracion{% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+{{parent()}}
+
+<div id="wrapper">
+    <section id="inner-headline">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <div class="inner-heading">
+                <h2>Decoración</h2>
+              </div>
+            </div>
+            <div class="span8">
+              <ul class="breadcrumb">
+                <li><a href="{{ path('index') }}"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                <li><a href="{{ path('decoracion_index') }}">Lista decoración</a><i class="icon-angle-right"></i></li>
+                <li class="active">Decoración</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    <section id="content">
+        <div class="container">
+          <div class="row">
+            <div class="span4">
+              <article>
+                <div class="top-wrapper">
+                  <div class="post-heading">
+                    <h3><a href="#">Información</a></h3>
+                  </div>
+                  <!-- start flexslider -->
+                  <div class="flexslider">
+                    <ul class="slides">
+                      <li class="" data-thumb-alt="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">                        
+                        <img src="{{ asset("img/works/full/image-01-full.jpg") }}" alt="" draggable="false">
+                      </li>
+                      <li data-thumb-alt="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;" class="flex-active-slide">
+                        <img src="{{ asset("img/works/full/image-02-full.jpg")}}" alt="" draggable="false">
+                      </li>
+                      <li data-thumb-alt="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
+                        <img src="{{ asset("img/works/full/image-03-full.jpg")}}" alt="" draggable="false">
+                      </li>
+                    </ul>
+                  <ol class="flex-control-nav flex-control-paging"><li><a href="#" class="">1</a></li><li><a href="#" class="flex-active">2</a></li><li><a href="#">3</a></li></ol><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li><li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li></ul></div>
+                  <!-- end flexslider -->
+                </div>
+                <p>
+                  Informacion detallada de la decoración
+                </p>
+              </article>
+            </div>
+            <div class="span8">
+              <aside class="right-sidebar">
+                <div class="widget">
+                  <h5 class="widgetheading">Detalle de decoración 
+                    {% if is_granted('ROLE_ADMIN') %}
+                     <a class="btn btn-warning btn-mini btn-rounded" href="{{ path('decoracion_edit', {'iddecoracion': decoracion.iddecoracion}) }}">Editar</a>
+                     {% endif %} 
+                  </h5>
+                  <ul class="folio-detail">
+                    <li><label>Id :</label> {{ decoracion.iddecoracion }} </li>
+                    <li><label>Nombre :</label> {{ decoracion.nombredecoracion }}</li>
+                    <li><label>Decoración para :</label> {{ decoracion.tipodecoracion }}</li>
+                    <li><label>Precio :</label> {{ decoracion.precio }}</li>
+                  </ul>
+                </div>
+                <div class="widget">
+                  <h5 class="widgetheading"></h5>
+                  <p>
+                    <a class='btn btn-blue' href="{{ path('decoracion_index') }}">Regresar</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('decoracion/_delete_form.html.twig') }}
+                    {% endif %}
+                    
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</div>
+    
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}     
+{% endblock %}

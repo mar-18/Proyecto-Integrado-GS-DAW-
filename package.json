@@ -1,0 +1,12 @@
+{
+  "name": "gestionEE",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Marlen <noemi.sajche@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1"
+  }
+}

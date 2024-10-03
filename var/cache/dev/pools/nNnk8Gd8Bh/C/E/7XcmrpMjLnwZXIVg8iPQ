@@ -1,0 +1,51 @@
+<?php //%255BApp%255CEntity%255CEvento%2524tipo%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\Choice'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Choice')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'message' => [
+                'Dato obligatorio',
+                'Elige un tipo válido: boda/cumple/gradua/conferencia',
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+                [
+                    'Default',
+                ],
+            ],
+            'choices' => [
+                1 => [
+                    'boda',
+                    'cumple',
+                    'gradua',
+                    'conferencia',
+                ],
+            ],
+            'name' => [
+                2 => 'tipo',
+            ],
+            'length' => [
+                2 => 255,
+            ],
+            'options' => [
+                2 => [
+                    'default' => 'boda,cumple,gradua,conferencia',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+    ],
+    []
+); }];

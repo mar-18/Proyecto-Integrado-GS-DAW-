@@ -1,0 +1,51 @@
+<?php //%255BApp%255CEntity%255CMenu%2524tipomenu%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\Choice'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Choice')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'message' => [
+                'Dato obligatorio',
+                'Elige un tipo válido: desayuno, comida, cena, tapas ',
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+                [
+                    'Default',
+                ],
+            ],
+            'choices' => [
+                1 => [
+                    'desayuno',
+                    'comida',
+                    'cena',
+                    'tapas',
+                ],
+            ],
+            'name' => [
+                2 => 'tipoMenu',
+            ],
+            'length' => [
+                2 => 45,
+            ],
+            'options' => [
+                2 => [
+                    'default' => 'desayuno,comida,cena,tapas',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+    ],
+    []
+); }];

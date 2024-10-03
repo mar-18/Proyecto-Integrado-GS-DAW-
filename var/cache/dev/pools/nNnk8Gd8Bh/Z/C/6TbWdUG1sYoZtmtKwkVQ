@@ -1,0 +1,61 @@
+<?php //%255BApp%255CEntity%255CCliente%2524nombre%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\Length'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Length')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\Regex'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Regex')),
+        clone ($p['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'maxMessage' => [
+                'El nombre no puede ser mayor a {{ limit }} caracteres',
+            ],
+            'minMessage' => [
+                'El nombre debe tener al menos {{ limit }} caracteres',
+            ],
+            'max' => [
+                45,
+            ],
+            'min' => [
+                2,
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+                [
+                    'Default',
+                ],
+                [
+                    'Default',
+                ],
+            ],
+            'message' => [
+                1 => 'El nombre no debe tener numeros',
+                'Dato obligatorio',
+            ],
+            'pattern' => [
+                1 => '/\\d/',
+            ],
+            'match' => [
+                1 => false,
+            ],
+            'name' => [
+                3 => 'Nombre',
+            ],
+            'length' => [
+                3 => 45,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+        $o[2],
+        $o[3],
+    ],
+    []
+); }];

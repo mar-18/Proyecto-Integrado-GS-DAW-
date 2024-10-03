@@ -1,0 +1,44 @@
+<?php //%255BApp%255CEntity%255CMenu%2524descripcion%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\Length'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\Length')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'maxMessage' => [
+                'La descripción no puede ser mayor a {{ limit }} caracteres',
+            ],
+            'minMessage' => [
+                'La descripción debe tener al menos {{ limit }} caracteres',
+            ],
+            'max' => [
+                45,
+            ],
+            'min' => [
+                5,
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+            ],
+            'name' => [
+                1 => 'descripcion',
+            ],
+            'length' => [
+                1 => 45,
+            ],
+            'nullable' => [
+                1 => true,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+); }];
